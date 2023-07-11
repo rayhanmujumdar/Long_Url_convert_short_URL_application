@@ -2,50 +2,23 @@ import { useState } from "react";
 import InputBox from "../feature/InputBox";
 import SubmitButton from "../feature/SubmitButton";
 import shortUrl from "../../utils/shortUrl";
-import genHash from "../../utils/genHash";
+import BoxMd from "../feature/BoxMd";
 
 export default function Home() {
-  const [url, setUrl] = useState("");
   const [error, setError] = useState(null);
   const [shortUrls, setShortUrls] = useState(null);
   const handleSubmit = (e) => {
     e.preventDefault();
-    const shortUrls = shortUrl(url, (err, validUrl) => {
+    const url = e.target.input.value;
+    console.log(url);
+    shortUrl(url, (err, shortUrl) => {
       if (err) return setError(err);
       setError(null);
-      const getUrl = JSON.parse(localStorage.getItem("urls")) || [];
-      if (getUrl?.length) {
-        const findShortUrl = getUrl?.find((url) => url.longUrl === validUrl) || {};
-        if (findShortUrl?.id) {
-          return findShortUrl;
-        } else {
-          window.location.hash = "";
-        }
-      }
-      genHash();
-      const hashh = window.location.hash.substring(1);
-      const shortUrl = "http://shortUrl" + "/" + hashh;
-      const result = {
-        id: hashh,
-        shortUrl,
-        longUrl: validUrl,
-      };
-      localStorage.setItem("urls", JSON.stringify([...getUrl, result]));
-      return result;
+      setShortUrls(shortUrl);
     });
-    // console.log(shortUrls);
-    setShortUrls(shortUrls);
   };
-  console.log(shortUrls);
-
   return (
     <div className="flex justify-center items-center flex-col mt-20">
-      <div>
-        <p>
-          Short url: {" "}
-          <a target="__blank" href={shortUrls?.longUrl}>{shortUrls?.shortUrl}</a>
-        </p>
-      </div>
       <form
         onSubmit={handleSubmit}
         className="flex justify-start items-start flex-col h-screen "
@@ -54,7 +27,7 @@ export default function Home() {
           Short URL generator
         </h1>
         <InputBox
-          onChange={(e) => setUrl(e.target.value)}
+          name="input"
           label={"LONG URL"}
           className="w-96"
           autoComplete="off"
@@ -65,6 +38,33 @@ export default function Home() {
         <SubmitButton type="submit" style={{ marginTop: "10px" }}>
           Submit
         </SubmitButton>
+
+        {shortUrls && (
+          <BoxMd className="my-5 rounded-xl shadow-md">
+            <div className="flex justify-center flex-col items-center my-5 gap-y-3">
+              <div className="w-80 bg-white py-3 px-1 overflow-x-auto">
+                <p className="font-semibold">Your Long URL:</p>
+                <span className="whitespace-pre-wrap">
+                  <a
+                    target="__blank"
+                    className="hover:text-blue-500"
+                    href={shortUrls?.longUrl}
+                  >
+                    {shortUrls?.longUrl}
+                  </a>
+                </span>
+              </div>
+              <div className="w-80 bg-white py-3 px-1">
+                <p className="font-semibold">Your Short URL:</p>
+                <span>
+                  <a target="__blank" href={shortUrls?.longUrl}>
+                    {shortUrls?.shortUrl}
+                  </a>
+                </span>
+              </div>
+            </div>
+          </BoxMd>
+        )}
       </form>
     </div>
   );
