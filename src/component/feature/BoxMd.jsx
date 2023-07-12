@@ -7,7 +7,11 @@ export default function BoxMd({ children, ...props }) {
       sx={{
         width: "24rem",
         height: "auto",
-        backgroundColor: "#D1ECF1",
+        backgroundColor: "#D1ECF1"
+        // "&:hover": {
+        //   backgroundColor: "#282A36",
+        //   transition: "0.5s ease-in-out",
+        // },
       }}
     >
       {children}

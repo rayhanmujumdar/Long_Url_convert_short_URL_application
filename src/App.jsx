@@ -8,6 +8,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route path="/url-list" element={<UrlList></UrlList>}></Route>
         {/* <Route path="/set-url" element={<Home></Home>}></Route> */}

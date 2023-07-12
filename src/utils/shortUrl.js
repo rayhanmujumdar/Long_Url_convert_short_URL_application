@@ -31,6 +31,7 @@ const shortUrl = (longUrl, cb) => {
     id: hashh,
     shortUrl,
     longUrl,
+    timestamp: Date.now(),
   };
   // add to localstorage shortUrl data
   localStorage.setItem("urls", JSON.stringify([...getUrl, result]));
