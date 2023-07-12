@@ -25,11 +25,12 @@ const shortUrl = (longUrl, cb) => {
   // generate random hash
   genHash();
   const hashh = window.location.hash.substring(1);
-  const shortUrl = "http://shortUrl" + "/" + hashh;
+  const urlPath = new URL(longUrl);
+  const shortUrl = "http://" + urlPath.hostname + "/" + hashh;
   const result = {
     id: hashh,
     shortUrl,
-    longUrl
+    longUrl,
   };
   // add to localstorage shortUrl data
   localStorage.setItem("urls", JSON.stringify([...getUrl, result]));
