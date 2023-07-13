@@ -1,7 +1,7 @@
 import { useState } from "react";
 import InputBox from "../feature/InputBox";
 import SubmitButton from "../feature/SubmitButton";
-import shortUrl from "../../utils/shortUrl";
+import getShortUrl from "../../utils/getShortUrl";
 import BoxMd from "../feature/BoxMd";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const url = e.target.input.value;
-    shortUrl(url, (err, shortUrl) => {
+    getShortUrl(url, (err, shortUrl) => {
       if (err) return setError(err);
       setError(null);
       setShortUrls(shortUrl);

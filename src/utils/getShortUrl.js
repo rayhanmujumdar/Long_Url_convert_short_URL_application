@@ -1,6 +1,6 @@
 import genHash from "./genHash";
 
-const shortUrl = (longUrl, cb) => {
+const getShortUrl = (longUrl, cb) => {
   // check valid url
   const isUrl =
     /https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/.test(
@@ -37,4 +37,4 @@ const shortUrl = (longUrl, cb) => {
   localStorage.setItem("urls", JSON.stringify([...getUrl, result]));
   return cb(null, result);
 };
-export default shortUrl;
+export default getShortUrl;

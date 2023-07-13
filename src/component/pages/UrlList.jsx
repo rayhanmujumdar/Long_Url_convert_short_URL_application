@@ -5,16 +5,23 @@ export default function UrlList() {
   const [render, setRender] = useState(false);
   const [urls, setUrls] = useState([]);
   useEffect(() => {
-    const urlItems = JSON.parse(localStorage.getItem("urls"));
+    const urlItems = JSON.parse(localStorage.getItem("urls")) || [];
     setUrls(urlItems);
   }, [render]);
   let content = null;
   if (urls.length === 0) {
     content = <p className="text-red-500">Not Found</p>;
   } else if (urls?.length > 0) {
-    content = urls.sort((a,b) => b.timestamp - a.timestamp).map((url) => (
-      <UrlItem key={url.id} url={url} setRender={setRender} render={render}></UrlItem>
-    ));
+    content = urls
+      .sort((a, b) => b.timestamp - a.timestamp)
+      .map((url) => (
+        <UrlItem
+          key={url.id}
+          url={url}
+          setRender={setRender}
+          render={render}
+        ></UrlItem>
+      ));
   }
   return (
     <div className="md:container mx-auto">

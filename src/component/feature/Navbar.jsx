@@ -9,7 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import UsbIcon from "@mui/icons-material/Usb";
+import LinkIcon from "@mui/icons-material/Link";
 import { Link as RouterLink } from "react-router-dom";
 
 const pages = ["home", "url-list"];
@@ -29,7 +29,7 @@ function Navbar() {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <UsbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <LinkIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -91,7 +91,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <UsbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <LinkIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
