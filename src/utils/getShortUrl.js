@@ -25,8 +25,7 @@ const getShortUrl = (longUrl, cb) => {
   // generate random hash
   genHash();
   const hashh = window.location.hash.substring(1);
-  const urlPath = new URL(longUrl);
-  const shortUrl = "http://" + urlPath.hostname + "/" + hashh;
+  const shortUrl = "http://short_Url/" + hashh;
   const result = {
     id: hashh,
     shortUrl,
